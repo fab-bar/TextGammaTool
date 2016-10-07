@@ -1,0 +1,114 @@
+<!-- This file contains only the first two lines of Griseldis -->
+<text id="1">
+  <cora-header name="Griseldis" sigle="1" />
+  <header>time:16/1
+language_area:nordniedersaechsisch
+literature:BC 362; Langhanke 2005; http://www.mrfh.de/33536; ; VD16 G 3366, vgl. http://gateway-bayern.de/VD16+G+3366
+style:
+notes_manuscript:Bl. 6 und 7 fehlen; im münsterschen kopierten Exemplar des Kopenhagener Druckes fehlt zudem Bl. 1r; keine Buchbindersynthese, sondern geplantes Doppelwerk (Langhanke 2005, 49)
+collation_by:SIH (Hamburg)
+library-shelfmark:77&amp;#x27;-12, 4°
+corpus:---
+place:Hamburg
+notes_language:&amp;quot;Griseldis&amp;quot;-Novelle ist eine wortgenaue Übersetzung der oberdt. Version Steinhöwels; Syntax und Grammatik sind hochdeutsch geprägt (Langhanke 2005, 51)
+text_ReN:De historie van der duldicheyt der vrowen geheten Griseldis; Uan sigismunda Des vorsten dochter van Salernia Unde van deme iungelinge Gwiscardo
+reference:Hs.: Blatt (r/v), Druck weist nur Lagenzählung auf
+token:
+annotation_by:SIH (Hamburg)
+Edition:a) Robert Langhanke: „Griseldis“ und „Sigismunda und Guiscardus“ niederdeutsch. Edition und Untersuchung des Druckes Hamburg 1502 (BC 362). Magisterarbeit Masch. Westfälische Wilhelms-Universität Münster 2005.; b) (zu BC 32) Derendorf, Brigitte (1996): Der Magdeburger Prosa-Äsop. Eine mittelniederdeutsche Bearbeitung von Heinrich Steinhöwels ‚Esopus‘ und Niklas von Wyles ‚Guiscard und Sigismunda‘. Text und Untersuchungen, Köln [u.a.], zugl. Diss. Münster 1986/87 (Niederdeutsche Studien).
+topic_ReN:L
+external_source:Bilddatei: s/w-Fotoband (Universität Münster, Germanistisches Institut, Abteilung Niederdeutsche Sprache und Literatur, fnd 362); Textdatei: Robert Langhanke
+library:Kopenhagen: Königliche Bibliothek
+notes_annotation:
+drawer:---
+scribe_or_printer:Drucker des Jegher
+base_for_transcription:Handschrift/Druck
+pre_editing_by:SIH (Hamburg)
+columns:---
+ID:12
+medium:Druck
+text-type:
+hands:---
+reference_secondary:---
+digitization_by:ARE (Hamburg)
+illustration:10 Holzschnitte
+genre:P
+abbr_ddd:Griseldis
+online_file:---
+online:http://www.mrfh.de/33536
+notes_transcription:Es sind einige Druckfehler zu verzeichnen; Bl.10v ist schlecht lesbar
+author:Anonymer Übersetzer; Übersetzungsliteratur aus dem oberdeutschen Raum: a) Griseldis: Heinrich Steinhöwels &amp;quot;Griseldis&amp;quot; b) Sigismunda: Niklas von Wyles &amp;quot;Guiscardus und Sigismunda&amp;quot; (Langhanke 2005, 70)
+topic:Poesie
+extract:1v-24r
+date_ReN:1502
+extent:24 Bl.
+proofreading_by:KDR (Hamburg)</header>
+  <layoutinfo>
+    <page id="p1" no="02" range="c1" side="r" />
+    <column id="c1" name="&lt;none&gt;" range="l1..l2" />
+    <line id="l1" name="01" range="t1_d1..t7_d1" />
+    <line id="l2" name="02" range="t8_d1..t10_d1" />
+  </layoutinfo>
+  <shifttags />
+  <comment type="K">Blatt 1v enthält lediglich einen Holzschnitt</comment>
+  <token id="t1" trans="¶">
+    <dipl id="t1_d1" trans="¶" utf="¶" />
+    <mod ascii="¶" checked="y" id="t1_m1" trans="¶" utf="¶">
+      <lemma tag="&lt;none&gt;" />
+      <lemma_wsd tag="&lt;none&gt;" /><lemma_simple tag="&lt;none&gt;" /><lemma_var tag="&lt;none&gt;" /><pos tag="$;" /><pos_gen tag="$;" /><morph tag="&lt;none&gt;" /></mod>
+  </token>
+  <token id="t2" trans="De">
+    <dipl id="t2_d1" trans="De" utf="De" />
+    <mod ascii="De" checked="y" id="t2_m1" trans="De" utf="De">
+      <lemma tag="dê/dê/dat" />
+    <lemma_wsd tag="dê¹/dê¹/dat²a" /><lemma_simple tag="de/de/dat" /><lemma_var tag="de/de/dat" /><pos tag="DDARTA" /><pos_gen tag="DD" /><morph tag="Fem.Nom.Sg" /></mod>
+  </token>
+  <token id="t3" trans="hystorie">
+    <dipl id="t3_d1" trans="hystorie" utf="hystorie" />
+    <mod ascii="hystorie" checked="y" id="t3_m1" trans="hystorie" utf="hystorie">
+      <lemma tag="histôrie" />
+    <lemma_wsd tag="histôrie" /><lemma_simple tag="historie" /><lemma_var tag="historie" /><pos tag="NA" /><pos_gen tag="NA" /><morph tag="Fem.Nom.Sg" /></mod>
+  </token>
+  <token id="t4" trans="van">
+    <dipl id="t4_d1" trans="van" utf="van" />
+    <mod ascii="van" checked="y" id="t4_m1" trans="van" utf="van">
+      <lemma tag="van" />
+    <lemma_wsd tag="van¹" /><lemma_simple tag="van" /><lemma_var tag="van" /><pos tag="APPR" /><pos_gen tag="AP" /><morph tag="Dat" /></mod>
+  </token>
+  <token id="t5" trans="der">
+    <dipl id="t5_d1" trans="der" utf="der" />
+    <mod ascii="der" checked="y" id="t5_m1" trans="der" utf="der">
+      <lemma tag="dê/dê/dat" />
+    <lemma_wsd tag="dê¹/dê¹/dat²a" /><lemma_simple tag="de/de/dat" /><lemma_var tag="de/de/dat" /><pos tag="DDARTA" /><pos_gen tag="DD" /><morph tag="Fem.Dat.Sg" /></mod>
+  </token>
+  <token id="t6" trans="duldicheyt">
+    <dipl id="t6_d1" trans="duldicheyt" utf="duldicheyt" />
+    <mod ascii="duldicheyt" checked="y" id="t6_m1" trans="duldicheyt" utf="duldicheyt">
+      <lemma tag="düldichêⁱt" />
+    <lemma_wsd tag="düldichêⁱt" /><lemma_simple tag="duldicheit" /><lemma_var tag="duldicheit" /><pos tag="NA" /><pos_gen tag="NA" /><morph tag="Fem.Dat.Sg" /></mod>
+  </token>
+  <token id="t7" trans="der">
+    <dipl id="t7_d1" trans="der" utf="der" />
+    <mod ascii="der" checked="y" id="t7_m1" trans="der" utf="der">
+      <lemma tag="dê/dê/dat" />
+    <lemma_wsd tag="dê¹/dê¹/dat²a" /><lemma_simple tag="de/de/dat" /><lemma_var tag="de/de/dat" /><pos tag="DDARTA" /><pos_gen tag="DD" /><morph tag="Fem.Gen.Sg" /></mod>
+  </token>
+  <token id="t8" trans="vrowen">
+    <dipl id="t8_d1" trans="vrowen" utf="vrowen" />
+    <mod ascii="vrowen" checked="y" id="t8_m1" trans="vrowen" utf="vrowen">
+      <lemma tag="vrouwe" />
+    <lemma_wsd tag="vrouwe²" /><lemma_simple tag="vrouwe" /><lemma_var tag="vrouwe" /><pos tag="NA" /><pos_gen tag="NA" /><morph tag="Fem.Gen.Sg" /></mod>
+  </token>
+  <token id="t9" trans="gheheten">
+    <dipl id="t9_d1" trans="gheheten" utf="gheheten" />
+    <mod ascii="gheheten" checked="y" id="t9_m1" trans="gheheten" utf="gheheten">
+      <lemma tag="hêⁱten" />
+    <lemma_wsd tag="hêⁱten²" /><lemma_simple tag="heiten" /><lemma_var tag="heiten" /><pos tag="VVPP" /><pos_gen tag="VV" /><morph tag="&lt;none&gt;" /></mod>
+  </token>
+  <token id="t10" trans="Griseldis">
+    <dipl id="t10_d1" trans="Griseldis" utf="Griseldis" />
+    <mod ascii="Griseldis" checked="y" id="t10_m1" trans="Griseldis" utf="Griseldis">
+      <lemma tag="griseldis" />
+      <lemma_wsd tag="griseldis" /><lemma_simple tag="griseldis" /><lemma_var tag="griseldis" /><pos tag="NE" /><pos_gen tag="NE" /><morph tag="Fem.Nom.Sg" /><bound_head tag="Überschrift" /><bound_sent tag="None" /></mod>
+  </token>
+</text>
