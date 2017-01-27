@@ -19,18 +19,13 @@ import org.xml.sax.SAXException;
 import corpus.AnnotatedText;
 import corpus.Annotator;
 import corpus.Text;
-import corpus.TextUnit;
 import corpus.Unit;
 
 
-public class CoraXMLReader extends AnnotatedTextFileReader {
+public class CoraXMLReader extends CoraFileReader {
 	
-	private String splitSymbol;
-	private String mergeSymbol;
-
 	public CoraXMLReader(String mergeSymbol, String splitSymbol) {
-		this.mergeSymbol = mergeSymbol;
-		this.splitSymbol = splitSymbol;
+		super(mergeSymbol, splitSymbol);
 	}
 
 	@Override
@@ -42,30 +37,10 @@ public class CoraXMLReader extends AnnotatedTextFileReader {
 		NodeList cora_tokens = document.getElementsByTagName("mod");
 		
 		List<Unit> annotations = new ArrayList<Unit>(cora_tokens.getLength());
-		
 		StringBuffer documentText = new StringBuffer();
 		
 		for(int i=0; i < cora_tokens.getLength(); i++) {
 			Node token = cora_tokens.item(i);
-			
-			int TokenBeg = documentText.length();
-			String token_text = token.getAttributes().getNamedItem("trans").getTextContent();
-			
-			boolean text_token = true;
-			
-			token_text = token_text.replace(this.mergeSymbol, " ");
-			
-			if (token_text.contains(this.splitSymbol)) {
-				text_token = false;
-				token_text = token_text.replace(this.splitSymbol, "");
-			}
-			
-			documentText.append(token_text);
-			int TokenEnd = documentText.length();
-
-			if (text_token) {
-				documentText.append(" ");
-			}
 
 			// read all annotations (i.e. subelements of mod that have a "tag" attribute)
 			HashMap<String, String> features = new HashMap<String, String>();
@@ -78,10 +53,10 @@ public class CoraXMLReader extends AnnotatedTextFileReader {
 					}
 				}
 			}
-			
-			TextUnit current_tok = new TextUnit(creator, TokenBeg, TokenEnd, features, token_text);
-			annotations.add(current_tok);
-			
+
+			addToken(documentText, annotations, creator,
+					token.getAttributes().getNamedItem("trans").getTextContent(), features);
+
 		}
 		
 		return new AnnotatedText(new Text(documentText.toString()), annotations);

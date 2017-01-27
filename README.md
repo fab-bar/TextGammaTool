@@ -17,12 +17,19 @@ three commands that can be run from the commandline. The commands read an
 annotated text from an input file that is defined with 3 arguments:
 
 1. The format of the input file.  
-   Currenty only the XML format used by the annotation tool
+   Currenty two formats created by the annotation tool
    [CorA](https://www.linguistics.ruhr-uni-bochum.de/comphist/resources/cora/)
-   is supported using the argument "CoraXML" or "CoraXMLReN".
+   are supported:
+   - CorA-XML using the argument "CoraXML" or "CoraXMLReN".
+   - Tab-separated values files as created by the export from CorA using
+     "CoraTSV" or "CoraTSVReN"  
+     The importer expects column names in the first row and a column named
+     "trans" containing the text. Following the conventions in CorA a merge- and
+     a splitSymbol in the text is used to recreate the original whitespace
+     between and in tokens.
 2. Options for the input format.  
-   "CoraXML" takes two obligatory options: the "mergeSymbol" and the "splitSymbol".  
-   "CoraXMLReN" is a shortcut for "CoraXML" with the options "mergeSymbol=#,splitSymbol=§".
+   "CoraXML" and "CoraTSV" take two obligatory options: the "mergeSymbol" and the "splitSymbol".  
+   "CoraXMLReN" and "CoraTSVReN" are shortcuts for "CoraXML"/"CoraTSV" with the options "mergeSymbol=#,splitSymbol=§".
 3. The file name of the input file.
 
 TextGammaTool depends on

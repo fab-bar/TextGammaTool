@@ -12,6 +12,8 @@ public class AnnotatedTextFileReaderStaticFactory {
 		tmp_map = new HashMap<>();
 		tmp_map.put("CoraXML", CoraXMLReaderFactory.class);
 		tmp_map.put("CoraXMLReN", CoraXMLReNReaderFactory.class);
+		tmp_map.put("CoraTSV", CoraTSVReaderFactory.class);
+		tmp_map.put("CoraTSVReN", CoraTSVReNReaderFactory.class);
 		// add further supported file types...
 		reader_types = Collections.unmodifiableMap(tmp_map);
 	}

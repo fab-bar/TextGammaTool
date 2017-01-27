@@ -24,5 +24,10 @@
 		<version>4.12</version>
 		<scope>test</scope>
 	</dependency>
+	<dependency>
+		<groupId>org.apache.commons</groupId>
+		<artifactId>commons-csv</artifactId>
+		<version>1.4</version>
+	</dependency>
   </dependencies>
 </project>
