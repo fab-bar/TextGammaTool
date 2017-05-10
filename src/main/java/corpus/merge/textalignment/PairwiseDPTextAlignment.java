@@ -1,8 +1,12 @@
 package corpus.merge.textalignment;
 
+import java.awt.Point;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 // align the annotations of two texts using dynamic programming
 public class PairwiseDPTextAlignment extends TextAlignment {
@@ -72,59 +76,151 @@ public class PairwiseDPTextAlignment extends TextAlignment {
 		}
 	}
 
-	private void backtrack_step(int i, int j, 
-			String alignmentSeqA, String alignmentSeqB, List<String[]> alignments) {
+	class BacktrackPath {
 
-		if (i > 0 || j > 0) {
+		private final String path1;
+		private final String path2;
+
+		public BacktrackPath(String path1, String path2) {
+			this.path1 = path1;
+			this.path2 = path2;
+		}
+
+		public BacktrackPath(BacktrackPath old_path, char add1, char add2) {
+			this.path1 = old_path.getPathList().get(0) + add1;
+			this.path2 = old_path.getPathList().get(1) + add2;
+		}
+
+		public List<String> getPathList() {
+			List<String> ret = new ArrayList<>(2);
+			ret.add(0, path1);
+			ret.add(1, path2);
+			return ret;
+		}
+
+		@Override
+		public String toString() {
+			return this.path1 + "\n" + this.path2;
+		}
+	}
+
+	private String[] reverseStrings(List<String> x) {
+		String[] t = new String[x.size()];
+		for (int i = 0; i < t.length; i++) {
+			t[i] = new StringBuilder(x.get(i)).reverse().toString();
+		}
+		return t;
+	}
+
+	private void addPathstoCell(Point cell, List<BacktrackPath> paths,
+			char a, char b,
+			Map<Point, List<BacktrackPath>> current_paths) {
+		if (!current_paths.containsKey(cell)) {
+			current_paths.put(cell, new LinkedList<>());
+		}
+		for	(BacktrackPath p: paths) {
+			current_paths.get(cell).add(new BacktrackPath(p, a, b));
+		}
+	}
+
+	private List<Point> addPathsFromCell(Point current_cell, Map<Point, List<BacktrackPath>> current_paths) {
+		int i = current_cell.x;
+		int j = current_cell.y;
+
+		List<Point> ret = new ArrayList<>();
+
+		if (!this.alignmentMatrix.checkCoordinates(current_cell.x, current_cell.y))
+			return ret;
+
+		List<BacktrackPath> paths_to_current_cell = current_paths.get(current_cell);
+		if (paths_to_current_cell != null) {
 
 			// if one meta-char
 			if ((i > 0 && metaChars.contains(textA[i-1])) || (j > 0 && metaChars.contains(textB[j-1]))) {
 				// if both opening: align
 				if (i > 0 && j > 0 && alignmentMatrix.get(i, j) == alignmentMatrix.get(i-1, j-1) + weight(i, j) && openUnit == textA[i-1]) {
-					backtrack_step(i-1, j-1, alignmentSeqA + textA[i-1], alignmentSeqB + textB[j-1], alignments);
+					Point next_cell = new Point(i-1, j-1);
+					ret.add(next_cell);
+					this.addPathstoCell(next_cell,	paths_to_current_cell, textA[i-1], textB[j-1], current_paths);
 				}
 				// if only one is opening: align the other
 				else if (i > 0 && j > 0 && alignmentMatrix.checkCoordinates(i, j-1) && openUnit == textA[i-1] && alignmentMatrix.get(i, j) == alignmentMatrix.get(i, j-1) + wGap) {
-					backtrack_step(i, j-1, alignmentSeqA + alignChar, alignmentSeqB + textB[j-1], alignments);
+					Point next_cell = new Point(i, j-1);
+					ret.add(next_cell);
+					this.addPathstoCell(next_cell,	paths_to_current_cell, alignChar, textB[j-1], current_paths);
 				}
 				else if (i > 0 && j > 0 && alignmentMatrix.checkCoordinates(i-1, j) && openUnit == textB[j-1] && alignmentMatrix.get(i, j) == alignmentMatrix.get(i-1, j) + wGap) {
-					backtrack_step(i-1, j, alignmentSeqA + textA[i-1], alignmentSeqB + alignChar, alignments);
+					Point next_cell = new Point(i-1, j);
+					ret.add(next_cell);
+					this.addPathstoCell(next_cell,	paths_to_current_cell, textA[i-1], alignChar, current_paths);
 				}
 				// else - try all possible alignments
 				else {
-					if (i > 0 && j > 0 && alignmentMatrix.get(i, j) == alignmentMatrix.get(i-1, j-1) + weight(i, j)) {
-						backtrack_step(i-1, j-1, alignmentSeqA + textA[i-1], alignmentSeqB + textB[j-1], alignments);
-					}
+					// the order is relevant as it determines the order in which the cells are processed
 					if (j > 0 && alignmentMatrix.checkCoordinates(i, j-1) && alignmentMatrix.get(i, j) == alignmentMatrix.get(i, j-1) + wGap) {
-						backtrack_step(i, j-1, alignmentSeqA + alignChar, alignmentSeqB + textB[j-1], alignments);
+						Point next_cell = new Point(i, j-1);
+						ret.add(next_cell);
+						this.addPathstoCell(next_cell,	paths_to_current_cell, alignChar, textB[j-1], current_paths);
 					}
 					if (i > 0 && alignmentMatrix.checkCoordinates(i-1, j) && alignmentMatrix.get(i, j) == alignmentMatrix.get(i-1, j) + wGap) {
-						backtrack_step(i-1, j, alignmentSeqA + textA[i-1], alignmentSeqB + alignChar, alignments);
+						Point next_cell = new Point(i-1, j);
+						ret.add(next_cell);
+						this.addPathstoCell(next_cell,	paths_to_current_cell, textA[i-1], alignChar, current_paths);
+					}
+					if (i > 0 && j > 0 && alignmentMatrix.get(i, j) == alignmentMatrix.get(i-1, j-1) + weight(i, j)) {
+						Point next_cell = new Point(i-1, j-1);
+						ret.add(next_cell);
+						this.addPathstoCell(next_cell,	paths_to_current_cell, textA[i-1], textB[j-1], current_paths);
 					}
 				}
 			}
 			// otherwise: align if possible, or add gap in first sequence or in second sequence
 			else if (i > 0 && j > 0 && alignmentMatrix.get(i, j) == alignmentMatrix.get(i-1, j-1) + weight(i, j)) {
-				backtrack_step(i-1, j-1, alignmentSeqA + textA[i-1], alignmentSeqB + textB[j-1], alignments);
+				Point next_cell = new Point(i-1, j-1);
+				ret.add(next_cell);
+				this.addPathstoCell(next_cell,	paths_to_current_cell, textA[i-1], textB[j-1], current_paths);
 			}
 			else if (j > 0 && alignmentMatrix.checkCoordinates(i, j-1) && alignmentMatrix.get(i, j) == alignmentMatrix.get(i, j-1) + wGap) {
-				backtrack_step(i, j-1, alignmentSeqA + alignChar, alignmentSeqB + textB[j-1], alignments);
+				Point next_cell = new Point(i, j-1);
+				ret.add(next_cell);
+				this.addPathstoCell(next_cell,	paths_to_current_cell, alignChar, textB[j-1], current_paths);
 			}
 			else if (i > 0 && alignmentMatrix.checkCoordinates(i-1, j) && alignmentMatrix.get(i, j) == alignmentMatrix.get(i-1, j) + wGap) {
-				backtrack_step(i-1, j, alignmentSeqA + textA[i-1], alignmentSeqB + alignChar, alignments);
+				Point next_cell = new Point(i-1, j);
+				ret.add(next_cell);
+				this.addPathstoCell(next_cell,	paths_to_current_cell, textA[i-1], alignChar, current_paths);
 			}
-
 		}
-		else {
-			String[] ret = { new StringBuilder(alignmentSeqA).reverse().toString(), 
-					new StringBuilder(alignmentSeqB).reverse().toString()};
-			alignments.add(ret);
-		}
+		return ret;
 	}
 
 	private void backtrack() {
-		alignments = new LinkedList<String[]>();
-		backtrack_step(textA.length, textB.length, "", "", alignments);
+
+		int i = textA.length;
+		int j = textB.length;
+
+		Map<Point, List<BacktrackPath>> current_paths = new HashMap<>();
+		{
+			List<BacktrackPath> initial = new ArrayList<>(1);
+			initial.add(new BacktrackPath("", ""));
+			current_paths.put(new Point(i, j), initial);
+		}
+
+		// iterate over the cells in the table that are on valid paths
+		// the list of valid cells is updated by addPaths
+		List<Point> next_cells = new LinkedList<Point>();
+		next_cells.add(new Point(i, j));
+		while(!next_cells.get(0).equals(new Point(0,0))) {
+			Point curr_cell = next_cells.remove(0);
+			next_cells.addAll(this.addPathsFromCell(curr_cell, current_paths));
+			current_paths.remove(curr_cell);
+		}
+
+		this.alignments = current_paths.get(new Point(0,0))
+				.stream()
+				.map(p -> this.reverseStrings(p.getPathList()))
+				.collect(Collectors.toList());
+
 	}
 
 	private int weight(int i, int j) {
