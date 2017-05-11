@@ -30,7 +30,7 @@ public class CoraTSVReader extends CoraFileReader {
 
 		// read tokens
 		Iterable<CSVRecord> tokens =
-				CSVFormat.newFormat('\t').withFirstRecordAsHeader().parse(new InputStreamReader(input));
+				CSVFormat.newFormat('\t').withFirstRecordAsHeader().parse(new InputStreamReader(input, "UTF-8"));
 
 
 		for(CSVRecord token: tokens) {
