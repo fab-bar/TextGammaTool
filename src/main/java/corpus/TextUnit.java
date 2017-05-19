@@ -54,8 +54,6 @@ public class TextUnit extends Unit {
 			ret.append("\t");
 			if (this.getAttributeValue(attribute) != null)
 				ret.append(this.getAttributeValue(attribute));
-			else
-				ret.append("--");
 		}
 		return ret.toString();
 	}

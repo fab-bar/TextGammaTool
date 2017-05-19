@@ -225,8 +225,6 @@ public class Unit implements Comparable<Unit> {
 			ret.append("\t");
 			if (this.getAttributeValue(attribute) != null)
 				ret.append(this.getAttributeValue(attribute));
-			else
-				ret.append("--");
 		}
 		return ret.toString();
 	}
